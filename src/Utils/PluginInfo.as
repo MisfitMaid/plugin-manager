@@ -38,7 +38,7 @@ class PluginInfo
 		m_id = js["identifier"];
 
 		m_name = js["name"];
-		
+
 		if (js.HasKey("authoruser")) {
 			m_author = js["authoruser"]["displayname"];
 		}
@@ -51,9 +51,10 @@ class PluginInfo
 		}
 
 		if (js.HasKey("links")) {
-			m_donateURL = js["links"]["donate"].GetType() == Json::Type::String ? js["links"]["donate"] : "";
-			m_sourceURL = js["links"]["source"].GetType() == Json::Type::String ? js["links"]["source"] : "";
-			m_issuesURL = js["links"]["issues"].GetType() == Json::Type::String ? js["links"]["issues"] : "";
+			auto jsLinks = js["links"];
+			m_donateURL = jsLinks["donate"].GetType() == Json::Type::String ? jsLinks["donate"] : null;
+			m_sourceURL = jsLinks["source"].GetType() == Json::Type::String ? jsLinks["source"] : null;
+			m_issuesURL = jsLinks["issues"].GetType() == Json::Type::String ? jsLinks["issues"] : null;
 		}
 
 		m_filesize = js["filesize"];
